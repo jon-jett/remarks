@@ -1,45 +1,87 @@
-# Remarks
+# Video Processing Assistant
 
-A modern application with a Python backend and Swift UI frontend.
+A macOS-native video processing tool with transcription and Final Cut Pro integration capabilities.
+
+## Features
+
+- Video downloading and processing
+- AI-powered transcription (Deepgram + local whisper.cpp)
+- Speaker identification
+- Final Cut Pro XML export
+- Drag-and-drop interface
+- Optimized for Apple Silicon
 
 ## Project Structure
 
 ```
-remarks/
-├── backend/         # Python backend
-│   ├── app/        # Main application code
-│   ├── tests/      # Backend tests
+video-processing-assistant/
+├── frontend/           # Electron application
+│   ├── src/           # Source files
+│   ├── public/        # Static assets
+│   └── package.json   # Frontend dependencies
+├── backend/           # Python FastAPI application
+│   ├── app/          # Application code
+│   ├── services/     # Core services
 │   └── requirements.txt
-├── frontend/       # Swift UI frontend
-│   └── Remarks/    # Main iOS app
 └── README.md
 ```
 
 ## Setup Instructions
 
+### Prerequisites
+
+- Node.js 18+
+- Python 3.9+
+- FFmpeg
+- whisper.cpp (for local transcription)
+
 ### Backend Setup
-1. Create a virtual environment:
+
+1. Create and activate virtual environment:
    ```bash
    cd backend
-   python -m venv venv
-   source venv/bin/activate  # On Unix/macOS
-   # or
-   .\venv\Scripts\activate  # On Windows
+   python -m venv .venv
+   source .venv/bin/activate
    ```
+
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-3. Run the development server:
+
+3. Start the backend server:
    ```bash
-   python app/main.py
+   uvicorn app.main:app --reload
    ```
 
 ### Frontend Setup
-1. Open the Xcode project in the `frontend/Remarks` directory
-2. Build and run the project in Xcode
+
+1. Install dependencies:
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
 ## Development
 
-- Backend runs on `http://localhost:8000` by default
-- Frontend connects to the backend API 
+- Backend API runs on `http://localhost:8000`
+- Frontend development server runs on `http://localhost:3000`
+- API documentation available at `http://localhost:8000/docs`
+
+## Building for Distribution
+
+```bash
+cd frontend
+npm run build
+```
+
+This will create a macOS application bundle in the `dist` directory.
+
+## License
+
+Internal use only - Not for commercial distribution 
