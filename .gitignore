@@ -86,3 +86,16 @@ DerivedData/
 *.dSYM.zip
 *.dSYM 
 .qodo
+
+# OS
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Project specific
+cookies/
+*.log
+notes.md

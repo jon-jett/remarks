@@ -1,87 +1,100 @@
-# Video Processing Assistant
+# Remarks Video Tool
 
-A macOS-native video processing tool with transcription and Final Cut Pro integration capabilities.
+A desktop application for downloading and managing video content, with support for transcription and FCPXML integration.
 
 ## Features
 
-- Video downloading and processing
-- AI-powered transcription (Deepgram + local whisper.cpp)
-- Speaker identification
-- Final Cut Pro XML export
-- Drag-and-drop interface
-- Optimized for Apple Silicon
+- **Web DL**: Download videos from YouTube and other supported sites
+- **File Transcribe**: Transcribe video files to text
+- **Transcribe from FCPXML**: Extract and transcribe clips from Final Cut Pro XML files
+- **Settings**: Configure application preferences
+
+## Installation
+
+1. Make sure you have Python 3.11 or newer installed
+2. Clone this repository
+3. Create a virtual environment and install dependencies:
+
+```bash
+# Create virtual environment
+python3.11 -m venv .venv
+
+# Activate virtual environment
+# On macOS/Linux:
+source .venv/bin/activate
+# On Windows:
+# .venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+## Usage
+
+### GUI Application
+
+Run the application with a graphical interface:
+
+```bash
+python app.py
+```
+
+This will open the NiceGUI interface with tabs for different functionality.
+
+### Command Line Interface
+
+The application also provides a CLI for automation and scripting:
+
+```bash
+# Show help
+python cli.py --help
+
+# Download a video
+python cli.py download url "https://www.youtube.com/watch?v=example"
+
+# Transcribe a video file
+python cli.py transcribe video path/to/video.mp4
+
+# Show current configuration
+python cli.py config show
+```
 
 ## Project Structure
 
-```
-video-processing-assistant/
-├── frontend/           # Electron application
-│   ├── src/           # Source files
-│   ├── public/        # Static assets
-│   └── package.json   # Frontend dependencies
-├── backend/           # Python FastAPI application
-│   ├── app/          # Application code
-│   ├── services/     # Core services
-│   └── requirements.txt
-└── README.md
-```
-
-## Setup Instructions
-
-### Prerequisites
-
-- Node.js 18+
-- Python 3.9+
-- FFmpeg
-- whisper.cpp (for local transcription)
-
-### Backend Setup
-
-1. Create and activate virtual environment:
-   ```bash
-   cd backend
-   python -m venv .venv
-   source .venv/bin/activate
-   ```
-
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Start the backend server:
-   ```bash
-   uvicorn app.main:app --reload
-   ```
-
-### Frontend Setup
-
-1. Install dependencies:
-   ```bash
-   cd frontend
-   npm install
-   ```
-
-2. Start the development server:
-   ```bash
-   npm run dev
-   ```
+- `remarks/` - Main package
+  - `downloader/` - Video downloading functionality
+  - `transcriber/` - Video transcription functionality
+  - `utils/` - Utility functions and configuration
+  - `cli/` - Command-line interface
+  - `api/` - API for programmatic access (future)
+  - `app.py` - NiceGUI application
 
 ## Development
 
-- Backend API runs on `http://localhost:8000`
-- Frontend development server runs on `http://localhost:3000`
-- API documentation available at `http://localhost:8000/docs`
+The project is designed with a modular architecture:
 
-## Building for Distribution
+1. Backend functions are organized in separate modules
+2. The CLI provides a command-line interface to these functions
+3. The GUI provides a user-friendly interface to the same functions
 
-```bash
-cd frontend
-npm run build
-```
+This separation allows for easier testing and maintenance.
 
-This will create a macOS application bundle in the `dist` directory.
+### Adding New Features
+
+To add a new feature:
+
+1. Implement the core functionality in the appropriate module
+2. Add CLI commands to expose the functionality
+3. Add GUI components to expose the functionality
+
+## Requirements
+
+- Python 3.11+
+- NiceGUI
+- yt-dlp
+- ffmpeg-python
+- OpenAI API key (for transcription features)
 
 ## License
 
-Internal use only - Not for commercial distribution 
+[MIT License](LICENSE) 
